@@ -110,7 +110,7 @@ export const weddingConfig: WeddingConfig = {
       name: "Meera Devi",
       teluguName: "మీరా దేవి",
       role: "Meet the Bride",
-      parents: "Sri Thamidela Madhava Reddy and Smt Krishna Veni",
+      parents: "Sri Thamidela Madhava Reddy and Smt Sudha Krishna Veni",
       image: bridePortrait,
     },
   },
