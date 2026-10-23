@@ -42,7 +42,7 @@ export const WeddingFooter: React.FC = () => {
 
         {/* Couple Names */}
         <h3 className="font-serif-royal text-3xl sm:text-4xl font-extrabold text-[#6D1429] tracking-wide">
-          {couple.bride.name} & {couple.groom.name}
+          {couple.groom.name} & {couple.bride.name}
         </h3>
 
         {/* Date */}
@@ -65,7 +65,7 @@ export const WeddingFooter: React.FC = () => {
 
         {/* Subtle Made with Love Line */}
         <div className="mt-8 text-xs text-[#8B1E2D]/60 flex items-center justify-center space-x-1 font-serif-royal">
-          <span>Crafted with love for the wedding celebration of Vardhan & Meera</span>
+          <span>Crafted with love for the wedding celebration of {couple.groom.name} & {couple.bride.name}</span>
         </div>
       </div>
     </footer>

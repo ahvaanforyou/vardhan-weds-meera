@@ -76,7 +76,7 @@ export const RSVPSection: React.FC = () => {
       className="relative overflow-hidden bg-[#F5EBD8] px-4 py-8 text-[#4A0B1A] sm:px-5 sm:py-10"
     >
       <div className="pointer-events-none absolute inset-0 bg-kolam-pattern opacity-[0.035]" aria-hidden="true" />
-
+      {/*
       <div className="relative z-10 mx-auto mb-4 max-w-3xl text-center sm:mb-5">
         <span className="font-telugu mb-1 block text-base font-bold text-[#8B1E2D]">
           మీ రాక మాకు ఆనందం
@@ -93,7 +93,8 @@ export const RSVPSection: React.FC = () => {
             Kindly RSVP by {rsvp.deadline}
           </p>
         )}
-      </div>
+      </div> */}
+      <FloralDivider theme="maroon" className="!my-2" />
 
       <div className="relative z-10 mx-auto max-w-[640px]">
         <motion.div

@@ -118,7 +118,7 @@ function svgOverlay({ brideName, groomName, weddingDate, weddingTime, message, v
     .map((x, index) => {
       const photoX = x + 8;
       const photoY = photoTop;
-      const name = index === 0 ? brideName : groomName;
+      const name = index === 0 ? groomName : brideName;
       return `<path d="${cardShape(photoX, photoY, innerWidth, photoHeight)}" fill="none" stroke="${COLORS.paleGold}" stroke-width="2"/><text x="${x + cardWidth / 2}" y="${cardY + 397}" class="portrait-name">${escapeXml(name)}</text><path d="M ${x + 64} ${cardY + 422} H ${x + 114}" stroke="${COLORS.gold}" stroke-width="1.5"/><path d="M ${x + 87} ${cardY + 422} l 2 2 -2 2 -2 -2z" fill="${COLORS.gold}"/>`;
     })
     .join("");
@@ -160,7 +160,7 @@ function svgOverlay({ brideName, groomName, weddingDate, weddingTime, message, v
 }
 
 async function generate() {
-  const { bride, groom } = weddingConfig.couple;
+  const { groom, bride } = weddingConfig.couple;
   const { width: previewWidth, height: previewHeight } = { width: WIDTH, height: HEIGHT };
   const weddingDate = new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
@@ -173,9 +173,9 @@ async function generate() {
   const photoHeight = 350;
   const photoTop = 85;
   const photoLefts = [48, 246];
-  const [bridePhoto, groomPhoto] = await Promise.all([
-    createArchedPortrait(imagePath(bride.image), photoWidth, photoHeight),
+  const [groomPhoto, bridePhoto] = await Promise.all([
     createArchedPortrait(imagePath(groom.image), photoWidth, photoHeight),
+    createArchedPortrait(imagePath(bride.image), photoWidth, photoHeight),
   ]);
   const ganesha = await sharp(imagePath(weddingConfig.images.ganeshaEmblem))
     .resize(45, 45, { fit: "contain" })
@@ -202,8 +202,8 @@ async function generate() {
           venueCity: weddingConfig.venue.city,
         }),
       },
-      { input: bridePhoto, left: photoLefts[0], top: photoTop },
-      { input: groomPhoto, left: photoLefts[1], top: photoTop },
+      { input: groomPhoto, left: photoLefts[0], top: photoTop },
+      { input: bridePhoto, left: photoLefts[1], top: photoTop },
       { input: ganesha, left: 792, top: 67 },
     ])
     .jpeg({ quality: 91, mozjpeg: true, chromaSubsampling: "4:4:4" })

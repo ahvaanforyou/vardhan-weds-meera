@@ -40,8 +40,8 @@ export interface GalleryPhoto {
 
 export interface WeddingConfig {
   couple: {
-    bride: CouplePerson;
     groom: CouplePerson;
+    bride: CouplePerson;
   };
   shlokas: {
     sanskritGanesha: string;
@@ -99,19 +99,19 @@ export const weddingConfig: WeddingConfig = {
     ganeshaEmblem,
   },
   couple: {
-    bride: {
-      name: "Meera Devi",
-      teluguName: "మీరా దేవి",
-      role: "Meet the Bride",
-      parents: "Sri Thamidela Madhava Reddy and Smt Krishna Veni",
-      image: bridePortrait,
-    },
     groom: {
       name: "Raja Vardhan Reddy",
       teluguName: "రాజ వర్ధన్ రెడ్డి",
       role: "Meet the Groom",
       parents: "Sri Palugulla Ravi Prakash Reddy and Smt Anasuya",
       image: groomPortrait,
+    },
+    bride: {
+      name: "Meera Devi",
+      teluguName: "మీరా దేవి",
+      role: "Meet the Bride",
+      parents: "Sri Thamidela Madhava Reddy and Smt Krishna Veni",
+      image: bridePortrait,
     },
   },
   shlokas: {

@@ -148,7 +148,7 @@ export const InvitationCover: React.FC<InvitationCoverProps> = ({
               {/* Couple Names - Strongest visual elements */}
               <div className="my-2 sm:my-3">
                 <h1 className="font-serif-royal text-3xl sm:text-4.5xl md:text-5xl font-bold tracking-wide gold-gradient-text drop-shadow-md leading-tight">
-                  {weddingConfig.couple.bride.name}
+                  {weddingConfig.couple.groom.name}
                 </h1>
 
                 {/* Telugu Wedding '&' / 'weds' flourish */}
@@ -161,7 +161,7 @@ export const InvitationCover: React.FC<InvitationCoverProps> = ({
                 </div>
 
                 <h1 className="font-serif-royal text-3xl sm:text-4.5xl md:text-5xl font-bold tracking-wide gold-gradient-text drop-shadow-md leading-tight">
-                  {weddingConfig.couple.groom.name}
+                  {weddingConfig.couple.bride.name}
                 </h1>
               </div>
 

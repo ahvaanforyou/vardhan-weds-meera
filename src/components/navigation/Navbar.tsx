@@ -78,7 +78,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div>
             <span className="font-serif-royal text-sm sm:text-base font-bold text-[#6D1429] tracking-wider block">
-              Raja Vardhan Reddy & Meera Devi
+              {weddingConfig.couple.groom.name} & {weddingConfig.couple.bride.name}
             </span>
             <span className="font-telugu text-[10px] text-[#8B1E2D] block -mt-0.5">
               కల్యాణ వైభోగమే

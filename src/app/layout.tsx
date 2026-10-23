@@ -41,7 +41,7 @@ const invitationImageAlt = `${coupleNames} wedding invitation thumbnail`;
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Raja Vardhan Reddy & Meera Devi — Telugu Wedding Invitation | కల్యాణ వైభోగమే",
+  title: `${coupleNames} — Telugu Wedding Invitation | కల్యాణ వైభోగమే`,
   description: invitationDescription,
   openGraph: {
     title: invitationTitle,
