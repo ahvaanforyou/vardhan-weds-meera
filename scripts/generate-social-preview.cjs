@@ -119,7 +119,7 @@ function svgOverlay({ brideName, groomName, weddingDate, weddingTime, message, v
       const photoX = x + 8;
       const photoY = photoTop;
       const name = index === 0 ? brideName : groomName;
-      return `<path d="${cardShape(photoX, photoY, innerWidth, photoHeight)}" fill="none" stroke="${COLORS.paleGold}" stroke-width="2"/><text x="${x + cardWidth / 2}" y="${cardY + 388}" class="portrait-name">${escapeXml(name)}</text><text x="${x + cardWidth / 2}" y="${cardY + 406}" class="portrait-role">${role}</text><path d="M ${x + 64} ${cardY + 422} H ${x + 114}" stroke="${COLORS.gold}" stroke-width="1.5"/><path d="M ${x + 87} ${cardY + 422} l 2 2 -2 2 -2 -2z" fill="${COLORS.gold}"/>`;
+      return `<path d="${cardShape(photoX, photoY, innerWidth, photoHeight)}" fill="none" stroke="${COLORS.paleGold}" stroke-width="2"/><text x="${x + cardWidth / 2}" y="${cardY + 397}" class="portrait-name">${escapeXml(name)}</text><path d="M ${x + 64} ${cardY + 422} H ${x + 114}" stroke="${COLORS.gold}" stroke-width="1.5"/><path d="M ${x + 87} ${cardY + 422} l 2 2 -2 2 -2 -2z" fill="${COLORS.gold}"/>`;
     })
     .join("");
   const messageSvg = escapedMessage
@@ -131,7 +131,6 @@ function svgOverlay({ brideName, groomName, weddingDate, weddingTime, message, v
       <style>
         text { text-anchor: middle; }
         .portrait-name { fill: ${COLORS.deepMaroon}; font-family: Georgia, 'Times New Roman', serif; font-size: 13px; font-weight: 700; }
-        .portrait-role { fill: ${COLORS.maroon}; font-family: Georgia, serif; font-size: 10px; font-weight: 600; letter-spacing: 1.2px; }
         .eyebrow { fill: ${COLORS.paleGold}; font-family: Georgia, serif; font-size: 16px; font-weight: 700; letter-spacing: 4px; }
         .names { fill: ${COLORS.ivory}; font-family: Georgia, 'Times New Roman', serif; font-size: 43px; font-weight: 600; }
         .ampersand { fill: ${COLORS.paleGold}; font-family: Georgia, serif; font-size: 27px; }
