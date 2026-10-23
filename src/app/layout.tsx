@@ -30,28 +30,37 @@ const plusJakarta = localFont({
   display: "swap",
 });
 
-// Set NEXT_PUBLIC_SITE_URL to the verified production domain in the deployment
-// environment. Without it, avoid emitting localhost-based Open Graph URLs.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
+const siteUrl = new URL("https://vardhan-weds-meera.vercel.app");
+const coupleImageUrl = new URL("/images/gallery-1.jpeg", siteUrl).toString();
+const invitationTitle = "Raja Vardhan Reddy & Meera Devi | Telugu Wedding Invitation";
+const invitationDescription =
+  "Join us with your family and blessings as we celebrate the traditional Telugu Hindu wedding of Raja Vardhan Reddy and Meera Devi.";
+const invitationImageAlt = "Raja Vardhan Reddy and Meera Devi together";
 
 export const metadata: Metadata = {
-  ...(metadataBase ? { metadataBase } : {}),
+  metadataBase: siteUrl,
   title: "Raja Vardhan Reddy & Meera Devi — Telugu Wedding Invitation | కల్యాణ వైభోగమే",
   description:
     "We joyfully invite you to celebrate the traditional Telugu Hindu wedding of Raja Vardhan Reddy and Meera Devi. Join us with your family and blessings.",
   openGraph: {
-    title: "Raja Vardhan Reddy & Meera Devi | Traditional Wedding Invitation",
-    description: "॥ శ్రీ గణేశాయ నమః ॥ You are cordially invited to celebrate our wedding.",
-    ...(metadataBase ? { images: [
+    title: invitationTitle,
+    description: invitationDescription,
+    url: siteUrl.toString(),
+    images: [
       {
-        url: "/images/gallery-1.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Raja Vardhan Reddy & Meera Devi Wedding Invitation",
+        url: coupleImageUrl,
+        width: 698,
+        height: 1093,
+        alt: invitationImageAlt,
       },
-    ] } : {}),
+    ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: invitationTitle,
+    description: invitationDescription,
+    images: [{ url: coupleImageUrl, alt: invitationImageAlt }],
   },
 };
 
