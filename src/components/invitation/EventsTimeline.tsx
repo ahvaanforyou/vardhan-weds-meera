@@ -298,6 +298,7 @@ export const EventsTimeline: React.FC = () => {
                       <span>{event.venue}</span>
                     </p>
                   </div>
+                  {event.address && <p className="mt-1 text-[11px] leading-snug text-[#736044] sm:text-xs">{event.address}</p>}
 
                   {eventMapUrl && (
                     <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
@@ -358,6 +359,7 @@ export const EventsTimeline: React.FC = () => {
                   <div className="mt-2 text-[11px] leading-snug text-[#736044]">
                     <p className={`flex items-start gap-1.5 font-semibold text-[#6D1429] ${isEven ? "justify-start" : "justify-end"}`}><MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#9A7730]" /><span>{event.venue}</span></p>
                   </div>
+                  {event.address && <p className={`mt-1 text-[11px] leading-snug text-[#736044] ${isEven ? "text-left" : "text-right"}`}>{event.address}</p>}
                   {eventMapUrl && <div className={`mt-3 flex flex-wrap gap-2 ${isEven ? "justify-start" : "justify-end"}`}>
                     <a href={eventMapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center justify-center gap-1 rounded-full border border-[#C9A45C] px-3 py-1.5 font-serif-royal text-[10px] font-semibold uppercase tracking-wide text-[#8B1E2D]">
                       <MapPin className="h-3 w-3" /><span>View Map</span><ExternalLink className="h-2.5 w-2.5" />

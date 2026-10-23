@@ -30,22 +30,27 @@ const plusJakarta = localFont({
   display: "swap",
 });
 
+// Set NEXT_PUBLIC_SITE_URL to the verified production domain in the deployment
+// environment. Without it, avoid emitting localhost-based Open Graph URLs.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sravya-karthik-wedding.com"),
-  title: "Sravya & Karthik — South Indian Wedding Invitation | కల్యాణ వైభోగమే",
+  ...(metadataBase ? { metadataBase } : {}),
+  title: "Raja Vardhan Reddy & Meera Devi — Telugu Wedding Invitation | కల్యాణ వైభోగమే",
   description:
-    "We joyfully invite you to celebrate the traditional Telugu Hindu wedding of Sravya Reddy and Karthik Varma. Join us with your family and blessings.",
+    "We joyfully invite you to celebrate the traditional Telugu Hindu wedding of Raja Vardhan Reddy and Meera Devi. Join us with your family and blessings.",
   openGraph: {
-    title: "Sravya & Karthik | Traditional Wedding Invitation",
+    title: "Raja Vardhan Reddy & Meera Devi | Traditional Wedding Invitation",
     description: "॥ శ్రీ గణేశాయ నమః ॥ You are cordially invited to celebrate our wedding.",
-    images: [
+    ...(metadataBase ? { images: [
       {
-        url: "/images/og-wedding-card.jpg",
+        url: "/images/gallery-1.jpeg",
         width: 1200,
         height: 630,
-        alt: "Sravya & Karthik Wedding Invitation",
+        alt: "Raja Vardhan Reddy & Meera Devi Wedding Invitation",
       },
-    ],
+    ] } : {}),
     type: "website",
   },
 };

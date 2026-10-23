@@ -65,9 +65,7 @@ export const WeddingFooter: React.FC = () => {
 
         {/* Subtle Made with Love Line */}
         <div className="mt-8 text-xs text-[#8B1E2D]/60 flex items-center justify-center space-x-1 font-serif-royal">
-          <span>Crafted with</span>
-          <Heart className="w-3 h-3 text-[#8B1E2D] fill-[#8B1E2D]" />
-          <span>for a Traditional South Indian Wedding Celebration</span>
+          <span>Crafted with love for the wedding celebration of Vardhan & Meera</span>
         </div>
       </div>
     </footer>

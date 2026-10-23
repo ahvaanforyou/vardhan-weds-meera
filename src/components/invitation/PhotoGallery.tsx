@@ -20,7 +20,7 @@ export const PhotoGallery: React.FC = () => {
   const slidesRef = useRef<(HTMLButtonElement | null)[]>([]);
   const currentRenderIndexRef = useRef(0);
   const recenterTimerRef = useRef<number | undefined>(undefined);
-  const renderCopies = gallery.length > 1 ? [0, 1, 2] : [1];
+  const renderCopies = gallery.length > 1 ? [0, 1, 2] : [0];
   const renderedPhotos = renderCopies.flatMap((copyIndex) =>
     gallery.map((photo, index) => ({ photo, index, copyIndex, renderIndex: copyIndex * gallery.length + index }))
   );
@@ -162,13 +162,13 @@ export const PhotoGallery: React.FC = () => {
     >
       <div className={`mx-auto max-w-4xl text-center ${gallery.length > 0 ? "mb-12" : ""}`}>
         <span className="font-telugu mb-1 block text-lg font-bold text-[#8B1E2D]">
-          మధుర క్షణాలు
+          మా జ్ఞాపకం
         </span>
         <h2 className="font-serif-royal text-3xl font-bold tracking-wide text-[#6D1429] sm:text-4xl md:text-5xl">
-          Cherished Moments
+          Our Moment
         </h2>
         <p className="font-serif-elegant mx-auto mt-2 max-w-xl text-lg italic text-[#8B1E2D] sm:text-xl">
-          Glimpses into our journey of love, laughter, and sacred traditions.
+          One beautiful moment, a lifetime of memories.
         </p>
         <FloralDivider theme="maroon" />
       </div>
@@ -205,11 +205,11 @@ export const PhotoGallery: React.FC = () => {
                 onClick={() => handleOpenLightbox(index)}
                 aria-label={`Open photo ${index + 1}: ${photo.caption}`}
                 aria-current={copyIndex === 1 && activeIndex === index ? "true" : undefined}
-                aria-hidden={copyIndex !== 1}
-                tabIndex={copyIndex === 1 ? 0 : -1}
-                className="group relative aspect-[4/3] w-[88%] max-w-[860px] shrink-0 snap-center overflow-hidden rounded-2xl border-2 border-[#C9A45C]/70 bg-[#E8D3B9] text-left shadow-xl transition-shadow duration-300 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6D1429] md:w-[75%] lg:w-[70%]"
+                aria-hidden={gallery.length > 1 && copyIndex !== 1}
+                tabIndex={gallery.length === 1 || copyIndex === 1 ? 0 : -1}
+                className={`group relative shrink-0 snap-center overflow-hidden rounded-2xl border-2 border-[#C9A45C]/70 bg-[#E8D3B9] text-left shadow-xl transition-shadow duration-300 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6D1429] ${gallery.length === 1 ? "mx-auto h-auto aspect-[698/1093] w-[min(82vw,420px)] max-h-[72vh] max-w-[88vw]" : "aspect-[4/3] w-[88%] max-w-[860px] md:w-[75%] lg:w-[70%]"}`}
                 initial={false}
-                animate={{ opacity: currentRenderIndex === renderIndex ? 1 : 0.78, scale: currentRenderIndex === renderIndex ? 1 : 0.97 }}
+                animate={{ opacity: gallery.length === 1 || currentRenderIndex === renderIndex ? 1 : 0.78, scale: gallery.length === 1 || currentRenderIndex === renderIndex ? 1 : 0.97 }}
                 transition={{ duration: 0.35 }}
               >
                 <Image
@@ -217,14 +217,15 @@ export const PhotoGallery: React.FC = () => {
                   alt={photo.caption}
                   fill
                   sizes="(max-width: 768px) 88vw, (max-width: 1024px) 75vw, 70vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="object-contain transition-transform duration-700"
+                  unoptimized
                   loading={index < 3 ? "eager" : "lazy"}
                 />
               </motion.button>
             ))}
           </div>
 
-          <button
+          {gallery.length > 1 && <button
             type="button"
             onClick={() => goToPhoto(activeIndex - 1)}
             disabled={gallery.length < 2}
@@ -232,8 +233,8 @@ export const PhotoGallery: React.FC = () => {
             className="absolute left-1 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#C9A45C] bg-[#FFF8E9]/95 text-[#6D1429] shadow-lg transition hover:bg-[#6D1429] hover:text-[#FFF8E9] disabled:cursor-not-allowed disabled:opacity-45 sm:left-5 sm:h-12 sm:w-12"
           >
             <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
-          </button>
-          <button
+          </button>}
+          {gallery.length > 1 && <button
             type="button"
             onClick={() => goToPhoto(activeIndex + 1)}
             disabled={gallery.length < 2}
@@ -241,10 +242,10 @@ export const PhotoGallery: React.FC = () => {
             className="absolute right-1 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#C9A45C] bg-[#FFF8E9]/95 text-[#6D1429] shadow-lg transition hover:bg-[#6D1429] hover:text-[#FFF8E9] disabled:cursor-not-allowed disabled:opacity-45 sm:right-5 sm:h-12 sm:w-12"
           >
             <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
-          </button>
+          </button>}
         </div>
 
-        <div className="-mx-1 mt-2 flex items-center justify-center gap-[5px] sm:mx-0 sm:mt-4" role="group" aria-label="Choose a gallery photo">
+        {gallery.length > 1 && <div className="-mx-1 mt-2 flex items-center justify-center gap-[5px] sm:mx-0 sm:mt-4" role="group" aria-label="Choose a gallery photo">
           {gallery.map((photo, index) => (
             <button
               key={photo.id}
@@ -262,7 +263,7 @@ export const PhotoGallery: React.FC = () => {
               />
             </button>
           ))}
-        </div>
+        </div>}
       </div>}
 
       <AnimatePresence>
@@ -281,7 +282,7 @@ export const PhotoGallery: React.FC = () => {
             >
               <X className="h-6 w-6" />
             </button>
-            <button
+            {gallery.length > 1 && <button
               onClick={(event) => {
                 event.stopPropagation();
                 handlePrevPhoto();
@@ -290,8 +291,8 @@ export const PhotoGallery: React.FC = () => {
               aria-label="Previous Photo"
             >
               <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button
+            </button>}
+            {gallery.length > 1 && <button
               onClick={(event) => {
                 event.stopPropagation();
                 handleNextPhoto();
@@ -300,7 +301,7 @@ export const PhotoGallery: React.FC = () => {
               aria-label="Next Photo"
             >
               <ChevronRight className="h-6 w-6" />
-            </button>
+            </button>}
 
             <motion.div
               key={gallery[lightboxIndex].id}
@@ -319,6 +320,7 @@ export const PhotoGallery: React.FC = () => {
                   sizes="100vw"
                   className="object-contain"
                   priority
+                  unoptimized
                 />
               </div>
               <div className="mt-4 max-w-xl rounded-full border border-[#C9A45C] bg-[#6D1429]/90 px-6 py-3 text-center shadow-lg">

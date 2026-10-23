@@ -74,11 +74,11 @@ export const Navbar: React.FC = () => {
           className="flex shrink-0 items-center space-x-2 text-left cursor-pointer group"
         >
           <div className="w-8 h-8 rounded-full border border-[#C9A45C] bg-[#6D1429] text-[#E3C98A] flex items-center justify-center font-serif-royal font-bold text-xs shadow-sm">
-            S&K
+            R&M
           </div>
           <div>
             <span className="font-serif-royal text-sm sm:text-base font-bold text-[#6D1429] tracking-wider block">
-              Sravya & Karthik
+              Raja Vardhan Reddy & Meera Devi
             </span>
             <span className="font-telugu text-[10px] text-[#8B1E2D] block -mt-0.5">
               కల్యాణ వైభోగమే

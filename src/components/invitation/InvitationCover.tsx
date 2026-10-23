@@ -45,19 +45,20 @@ export const InvitationCover: React.FC<InvitationCoverProps> = ({
 
   const handleOpenClick = () => {
     if (isOpening) return;
-    setIsOpening(true);
-    if (prefersReducedMotion) {
-      onOpen();
-    } else {
-      // Start the open transition before attempting audio so a playback failure
-      // can never leave the invitation stuck in its opening state.
-      window.setTimeout(() => onOpen(), 700);
-    }
 
+    // Ask the persistent audio element to play as the first action in the
+    // trusted click handler, before starting the invitation transition.
     try {
       onStartMusic?.();
     } catch {
       // Music is optional; the invitation should still open if audio fails.
+    }
+
+    setIsOpening(true);
+    if (prefersReducedMotion) {
+      onOpen();
+    } else {
+      window.setTimeout(() => onOpen(), 700);
     }
   };
 

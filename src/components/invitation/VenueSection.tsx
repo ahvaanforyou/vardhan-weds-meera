@@ -4,23 +4,25 @@ import React from "react";
 import { motion } from "framer-motion";
 import { weddingConfig } from "@/data/wedding-data";
 import { FloralDivider, CornerOrnament } from "../traditional/OrnamentalBorders";
-import { MapPin, Navigation, Calendar, Car, Compass, ExternalLink } from "lucide-react";
+import { Navigation, Calendar, Car, Compass, ExternalLink } from "lucide-react";
 
 export const VenueSection: React.FC = () => {
   const { venue, weddingDateTime } = weddingConfig;
   const mapsUrl = venue.googleMapsUrl?.trim();
   const mapEmbedUrl = venue.googleMapsEmbedUrl?.trim();
-  const hasMap = Boolean(mapsUrl || mapEmbedUrl);
   const showMapEmbed = venue.showMapEmbed && Boolean(mapEmbedUrl);
 
   const getGoogleCalendarUrl = () => {
-    const text = encodeURIComponent("Wedding Ceremony: Sravya & Karthik (Sumuhurtham)");
+    const text = encodeURIComponent(`Wedding Ceremony: ${weddingConfig.couple.groom.name} & ${weddingConfig.couple.bride.name}`);
     const details = encodeURIComponent(
       `Join us for the sacred wedding ceremony.\\nMuhurtham: ${weddingDateTime.muhurthamTime}\\nVenue: ${venue.name}\\n${venue.address}`
     );
     const location = encodeURIComponent(`${venue.name}, ${venue.address}`);
     // Format YYYYMMDDTHHmmssZ
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=20261218T050800Z/20261218T090000Z&details=${details}&location=${location}`;
+    const start = new Date(weddingDateTime.iso);
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
+    const toGoogleDate = (date: Date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${toGoogleDate(start)}/${toGoogleDate(end)}&details=${details}&location=${location}`;
   };
 
   return (
@@ -42,14 +44,14 @@ export const VenueSection: React.FC = () => {
         <FloralDivider theme="maroon" />
       </div>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="max-w-5xl mx-auto">
         {/* Venue Information Card */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className={`${hasMap ? "lg:col-span-6" : "lg:col-span-12"} relative bg-gradient-to-b from-[#6D1429] via-[#5A0F21] to-[#420A17] text-[#FFF8E9] rounded-2xl p-7 sm:p-9 border-2 border-[#C9A45C] shadow-2xl flex flex-col justify-between overflow-hidden`}
+          className="relative z-10 bg-gradient-to-b from-[#6D1429] via-[#5A0F21] to-[#420A17] text-[#FFF8E9] rounded-2xl p-5 sm:p-8 border-2 border-[#C9A45C] shadow-2xl flex flex-col justify-between overflow-hidden"
         >
           <CornerOrnament position="top-left" size={44} color="#E3C98A" />
           <CornerOrnament position="top-right" size={44} color="#E3C98A" />
@@ -57,12 +59,6 @@ export const VenueSection: React.FC = () => {
           <CornerOrnament position="bottom-right" size={44} color="#E3C98A" />
 
           <div className="relative z-10">
-            {/* Tag */}
-            <span className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-[#E3C98A]/20 border border-[#E3C98A]/40 text-[#E3C98A] text-xs font-serif-royal font-semibold tracking-wider uppercase mb-4">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>Sacred Kalyana Mandapam</span>
-            </span>
-
             {/* Venue Names */}
             <h3 className="font-serif-royal text-2xl sm:text-3xl font-bold text-[#FFF8E9] tracking-wide">
               {venue.name}
@@ -73,15 +69,32 @@ export const VenueSection: React.FC = () => {
               </span>
             )}
 
-            {/* Address */}
-            <div className="my-5 p-4 rounded-xl bg-[#2B050E]/60 border border-[#C9A45C]/30 text-sm space-y-2">
-              <p className="font-medium text-[#FFF8E9] leading-relaxed">
-                {venue.address}
-              </p>
-              <p className="text-[#E3C98A]">
-                {venue.city}, {venue.state} — {venue.pincode}
-              </p>
-            </div>
+            {showMapEmbed && <div className="relative z-20 mt-5 overflow-hidden rounded-xl border-2 border-[#C9A45C] shadow-lg">
+              <iframe
+                src={mapEmbedUrl}
+                width="100%"
+                height="380"
+                style={{ border: 0, display: "block" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Interactive map for ${venue.name}, ${venue.city}`}
+                className="h-[320px] w-full sm:h-[380px]"
+              />
+            </div>}
+
+            <p className="mt-3 text-sm font-medium leading-relaxed text-[#FFF8E9]">
+              {venue.address}
+            </p>
+            {mapsUrl && <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex min-h-9 w-fit items-center gap-1.5 rounded-full border border-[#E3C98A] px-3.5 py-1.5 font-serif-royal text-xs font-semibold text-[#E3C98A] transition-colors hover:bg-[#E3C98A]/20"
+            >
+              <span>Open in Google Maps</span>
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>}
 
             {/* Date & Muhurtham Reminder */}
             <div className="space-y-3 text-xs sm:text-sm text-[#FFF8E9]/90 border-t border-[#C9A45C]/30 pt-4">
@@ -118,18 +131,6 @@ export const VenueSection: React.FC = () => {
 
           {/* Interactive Direction & Calendar Buttons */}
           <div className="relative z-10 pt-6 mt-6 border-t border-[#C9A45C]/40 flex flex-wrap gap-3">
-            {/* Get Directions Button */}
-            {mapsUrl && <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-[#C9A45C] text-[#3B0713] font-serif-royal font-bold text-xs sm:text-sm tracking-wide uppercase hover:bg-[#E3C98A] transition-all duration-200 shadow-md cursor-pointer"
-            >
-              <MapPin className="w-4 h-4" />
-              <span>Get Directions</span>
-              <ExternalLink className="w-3.5 h-3.5 ml-1" />
-            </a>}
-
             {/* Google Calendar Link */}
             <a
               href={getGoogleCalendarUrl()}
@@ -144,48 +145,6 @@ export const VenueSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Embedded Interactive Map Card */}
-        {hasMap && (
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="lg:col-span-6 relative rounded-2xl overflow-hidden border-2 border-[#C9A45C] shadow-2xl bg-[#F5EBD8] min-h-[360px] flex flex-col"
-        >
-          {showMapEmbed ? (
-            <iframe
-              src={mapEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: "360px", flexGrow: 1 }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Wedding Venue Map"
-              className="w-full h-full"
-            />
-          ) : (
-            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-[#FFFDF8]">
-              <MapPin className="w-12 h-12 text-[#8B1E2D] mb-3" />
-              <h4 className="font-serif-royal text-lg font-bold text-[#6D1429]">
-                {venue.name}
-              </h4>
-              <p className="text-sm text-[#4A0B1A]/80 mt-1 max-w-sm">
-                {venue.address}
-              </p>
-              {mapsUrl && <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 px-5 py-2.5 rounded-full bg-[#8B1E2D] text-[#FFF8E9] text-xs font-serif-royal font-semibold uppercase tracking-wider hover:bg-[#6D1429] transition-colors"
-              >
-                Open in Google Maps
-              </a>}
-            </div>
-          )}
-        </motion.div>
-        )}
       </div>
     </section>
   );

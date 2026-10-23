@@ -64,7 +64,7 @@ export const CoupleSection: React.FC = () => {
                 alt={bride.name}
                 fill
                 sizes="(max-width: 768px) 192px, 220px"
-                className="object-cover object-center transition-transform duration-500 hover:scale-105"
+                className="object-cover object-[65%_42%] transition-transform duration-500"
                 priority
               />
             </div>
@@ -129,7 +129,7 @@ export const CoupleSection: React.FC = () => {
                 alt={groom.name}
                 fill
                 sizes="(max-width: 768px) 192px, 220px"
-                className="object-cover object-center transition-transform duration-500 hover:scale-105"
+                className="object-cover object-center transition-transform duration-500"
                 priority
               />
             </div>
