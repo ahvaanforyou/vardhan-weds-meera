@@ -119,7 +119,6 @@ function svgOverlay({ brideName, groomName, weddingDate, weddingTime, message, v
       const photoX = x + 8;
       const photoY = photoTop;
       const name = index === 0 ? brideName : groomName;
-      const role = index === 0 ? "THE BRIDE" : "THE GROOM";
       return `<path d="${cardShape(photoX, photoY, innerWidth, photoHeight)}" fill="none" stroke="${COLORS.paleGold}" stroke-width="2"/><text x="${x + cardWidth / 2}" y="${cardY + 388}" class="portrait-name">${escapeXml(name)}</text><text x="${x + cardWidth / 2}" y="${cardY + 406}" class="portrait-role">${role}</text><path d="M ${x + 64} ${cardY + 422} H ${x + 114}" stroke="${COLORS.gold}" stroke-width="1.5"/><path d="M ${x + 87} ${cardY + 422} l 2 2 -2 2 -2 -2z" fill="${COLORS.gold}"/>`;
     })
     .join("");
