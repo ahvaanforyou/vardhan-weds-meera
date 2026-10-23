@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { weddingConfig } from "@/data/wedding-data";
+import socialPreview from "@/data/social-preview.generated.json";
 import "./globals.css";
 
 const cinzel = localFont({
@@ -31,17 +33,16 @@ const plusJakarta = localFont({
 });
 
 const siteUrl = new URL("https://vardhan-weds-meera.vercel.app");
-const coupleImageUrl = new URL("/images/gallery-1.jpeg", siteUrl).toString();
-const invitationTitle = "Raja Vardhan Reddy & Meera Devi | Telugu Wedding Invitation";
-const invitationDescription =
-  "Join us with your family and blessings as we celebrate the traditional Telugu Hindu wedding of Raja Vardhan Reddy and Meera Devi.";
-const invitationImageAlt = "Raja Vardhan Reddy and Meera Devi together";
+const coupleNames = `${weddingConfig.couple.groom.name} & ${weddingConfig.couple.bride.name}`;
+const coupleImageUrl = new URL(socialPreview.src, siteUrl).toString();
+const invitationTitle = `${coupleNames} | Telugu Wedding Invitation`;
+const invitationDescription = weddingConfig.socialPreviewMessage;
+const invitationImageAlt = `${coupleNames} wedding invitation thumbnail`;
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: "Raja Vardhan Reddy & Meera Devi — Telugu Wedding Invitation | కల్యాణ వైభోగమే",
-  description:
-    "We joyfully invite you to celebrate the traditional Telugu Hindu wedding of Raja Vardhan Reddy and Meera Devi. Join us with your family and blessings.",
+  description: invitationDescription,
   openGraph: {
     title: invitationTitle,
     description: invitationDescription,
@@ -49,8 +50,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: coupleImageUrl,
-        width: 698,
-        height: 1093,
+        width: socialPreview.width,
+        height: socialPreview.height,
         alt: invitationImageAlt,
       },
     ],

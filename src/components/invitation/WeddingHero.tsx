@@ -63,7 +63,7 @@ export const WeddingHero: React.FC = () => {
             </motion.div>
 
             <Image
-              src="/images/ganesha-emblem.png"
+              src={weddingConfig.images.ganeshaEmblem}
               alt="Golden Ganesha emblem"
               width={1276}
               height={1233}
@@ -124,7 +124,8 @@ export const WeddingHero: React.FC = () => {
 
               <div className="flex items-center space-x-2 text-[#E3C98A]/90 text-xs sm:text-sm text-center">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
-                <span className="font-serif-royal font-medium">{weddingConfig.venue.name}</span>
+                <span className="font-serif-royal font-medium">{weddingConfig.venue.name}, {weddingConfig.venue.city}</span>
+
               </div>
             </motion.div>
           </div>

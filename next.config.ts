@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     localPatterns: [
-      { pathname: "/images/bride.jpeg", search: "?v=30ebd56f1c04" },
-      { pathname: "/images/groom.jpeg", search: "?v=040600e29711" },
+      { pathname: "/_next/static/media/**", search: "" },
       { pathname: "/images/**", search: "" },
     ],
   },

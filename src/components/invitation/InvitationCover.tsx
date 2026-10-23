@@ -116,7 +116,7 @@ export const InvitationCover: React.FC<InvitationCoverProps> = ({
             {/* Central Invitation Card Body */}
             <div className="relative z-10 min-h-0 flex-[1_1_auto] overflow-y-auto overscroll-contain px-5 sm:px-8 py-2 sm:py-3 flex flex-col items-center justify-center text-center">
               <Image
-                src="/images/ganesha-emblem.png"
+                src={weddingConfig.images.ganeshaEmblem}
                 alt="Golden Ganesha emblem"
                 width={1276}
                 height={1233}
@@ -128,9 +128,6 @@ export const InvitationCover: React.FC<InvitationCoverProps> = ({
 
               {/* Sacred Sanskrit / Telugu Ganesha Invocation */}
               <div className="mb-2">
-                <p className="font-serif-royal text-base sm:text-lg tracking-widest text-[#E3C98A] font-semibold drop-shadow-sm">
-                  {weddingConfig.shlokas.sanskritGanesha}
-                </p>
                 <p className="font-telugu text-sm sm:text-base text-[#FFE5A3] mt-0.5 opacity-90">
                   {weddingConfig.shlokas.teluguGanesha}
                 </p>
@@ -177,7 +174,10 @@ export const InvitationCover: React.FC<InvitationCoverProps> = ({
                   {weddingConfig.weddingDateTime.muhurthamTelugu}
                 </p>
               </div>
+              <p>
 
+                
+              </p>
               {/* Brass Diya illustration */}
               <div className="mt-1 mb-0">
                 <BrassDiya size={50} />

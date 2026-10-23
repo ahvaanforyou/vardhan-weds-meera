@@ -1,3 +1,9 @@
+import type { StaticImageData } from "next/image";
+import bridePortrait from "../../public/images/bride.jpeg";
+import couplePortrait from "../../public/images/gallery-1.jpeg";
+import ganeshaEmblem from "../../public/images/ganesha-emblem.png";
+import groomPortrait from "../../public/images/groom.jpeg";
+
 export interface CouplePerson {
   name: string;
   teluguName: string;
@@ -5,7 +11,7 @@ export interface CouplePerson {
   parents: string;
   grandparents?: string;
   description?: string;
-  image: string;
+  image: StaticImageData;
   instagram?: string;
 }
 
@@ -26,7 +32,7 @@ export interface WeddingEvent {
 
 export interface GalleryPhoto {
   id: string;
-  src: string;
+  src: StaticImageData;
   caption: string;
   category: "all" | "traditional" | "pre-wedding" | "candid";
   aspect: "portrait" | "landscape" | "square";
@@ -53,6 +59,11 @@ export interface WeddingConfig {
     timezone: string;
   };
   events: WeddingEvent[];
+  socialPreviewMessage: string;
+  images: {
+    couple: StaticImageData;
+    ganeshaEmblem: StaticImageData;
+  };
   venue: {
     name: string;
     teluguName?: string;
@@ -83,20 +94,24 @@ export interface WeddingConfig {
 }
 
 export const weddingConfig: WeddingConfig = {
+  images: {
+    couple: couplePortrait,
+    ganeshaEmblem,
+  },
   couple: {
     bride: {
       name: "Meera Devi",
       teluguName: "మీరా దేవి",
       role: "Meet the Bride",
-      parents: "Sri Madhava Reddy and Smt Krishna Veni",
-      image: "/images/bride.jpeg?v=30ebd56f1c04",
+      parents: "Sri Thamidela Madhava Reddy and Smt Krishna Veni",
+      image: bridePortrait,
     },
     groom: {
       name: "Raja Vardhan Reddy",
       teluguName: "రాజ వర్ధన్ రెడ్డి",
       role: "Meet the Groom",
-      parents: "Sri Ravi Prakash Reddy and Smt Anasuya",
-      image: "/images/groom.jpeg?v=040600e29711",
+      parents: "Sri Palugulla Ravi Prakash Reddy and Smt Anasuya",
+      image: groomPortrait,
     },
   },
   shlokas: {
@@ -124,7 +139,7 @@ export const weddingConfig: WeddingConfig = {
       time: "10:00 AM",
       venue: "Krishnam Setty Palli",
       address: "Giddalur, Prakasam District, Andhra Pradesh",
-      googleMapsUrl: "https://maps.app.goo.gl/2yJFYmmdupgWBZmi6?g_st=ac",
+      googleMapsUrl: "https://maps.app.goo.gl/UZbSh6gwqT1YfNNi9?g_st=ic",
       icon: "kalash",
     },
     {
@@ -140,6 +155,8 @@ export const weddingConfig: WeddingConfig = {
       icon: "mandapam",
     },
   ],
+  socialPreviewMessage:
+    "With blessings from our families, join us to celebrate our wedding.",
   venue: {
     name: "Tirumala Convention",
     address: "Kurnool Main Road, Giddalur, Andhra Pradesh",
@@ -153,7 +170,7 @@ export const weddingConfig: WeddingConfig = {
   gallery: [
     {
       id: "photo-1",
-      src: "/images/gallery-1.jpeg",
+      src: couplePortrait,
       caption: "Raja Vardhan Reddy & Meera Devi",
       category: "traditional",
       aspect: "landscape",

@@ -207,7 +207,11 @@ export const PhotoGallery: React.FC = () => {
                 aria-current={copyIndex === 1 && activeIndex === index ? "true" : undefined}
                 aria-hidden={gallery.length > 1 && copyIndex !== 1}
                 tabIndex={gallery.length === 1 || copyIndex === 1 ? 0 : -1}
-                className={`group relative shrink-0 snap-center overflow-hidden rounded-2xl border-2 border-[#C9A45C]/70 bg-[#E8D3B9] text-left shadow-xl transition-shadow duration-300 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6D1429] ${gallery.length === 1 ? "mx-auto h-auto aspect-[698/1093] w-[min(82vw,420px)] max-h-[72vh] max-w-[88vw]" : "aspect-[4/3] w-[88%] max-w-[860px] md:w-[75%] lg:w-[70%]"}`}
+                className={`group relative shrink-0 snap-center overflow-hidden rounded-2xl border-2 border-[#C9A45C]/70 bg-[#E8D3B9] text-left shadow-xl transition-shadow duration-300 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6D1429] ${gallery.length === 1 ? "mx-auto h-auto max-w-[92vw]" : "aspect-[4/3] w-[88%] max-w-[860px] md:w-[75%] lg:w-[70%]"}`}
+                style={gallery.length === 1 ? {
+                  aspectRatio: `${photo.src.width} / ${photo.src.height}`,
+                  width: `min(88vw, 460px, ${72 * photo.src.width / photo.src.height}vh)`,
+                } : undefined}
                 initial={false}
                 animate={{ opacity: gallery.length === 1 || currentRenderIndex === renderIndex ? 1 : 0.78, scale: gallery.length === 1 || currentRenderIndex === renderIndex ? 1 : 0.97 }}
                 transition={{ duration: 0.35 }}
